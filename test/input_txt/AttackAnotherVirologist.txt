@@ -1,0 +1,6 @@
+load spreadbacktest.txt
+listNeighbours
+step 5
+listThingsOnField
+attack Virologus2
+nextPlayer

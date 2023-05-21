@@ -1,0 +1,4 @@
+Loading from file was successful
+Neighbour: Field id: 1
+Stepped on Field
+You have been spreaded with Bear Agent

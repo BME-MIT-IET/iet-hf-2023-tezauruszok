@@ -1,0 +1,13 @@
+Loading from file was successful
+Neighbour: Laboratory id: 1
+Neighbour: Laboratory id: 2
+Neighbour: Shelter id: 3
+Neighbour: Warehouse id: 4
+Neighbour: Field id: 5
+Stepped on Shelter
+1. Gloves
+2. Sack
+3. Cloak
+4. Axe
+5. TestVirologus
+You have successfully picked up Gloves

@@ -1,0 +1,4 @@
+# Project exclude paths
+/out/
+legendary_student_list.iml
+*.class

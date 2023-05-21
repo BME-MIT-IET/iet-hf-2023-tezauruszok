@@ -1,0 +1,4 @@
+load steponwarehouse.txt
+listNeighbours
+step 2
+	

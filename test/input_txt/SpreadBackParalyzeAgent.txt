@@ -1,0 +1,8 @@
+load spreadbacktest.txt
+listNeighbours
+step 5
+listThingsOnField
+spread Virologus2 Paralyze_agent
+nextPlayer
+spreadingBack TestVirologus Paralyze_agent
+nextPlayer
