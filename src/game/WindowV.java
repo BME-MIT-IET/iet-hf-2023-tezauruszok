@@ -135,7 +135,7 @@ public class WindowV extends JFrame {
          *  ha nem tud oda mozogni akkor ez nem sikeres
          * */
         table.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 if (true) {     /// AMEDDIG NEM ÁLLT LE A JÁTÉK, VALAMI KELL IDE GAMETABLEBOL
                     if (e.getButton() == MouseEvent.BUTTON3) {
                         JTable target = (JTable)e.getSource();
