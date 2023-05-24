@@ -3,7 +3,7 @@ Manual test cases:
 		arrangements:
 			pick one player, hit Mentés button and then Játék kezdése button
 		expected result:
-			map is loaded which consists of sqaures with player's name on its head, with empty inventory
+			map is loaded which consists of squares with player's name on its head, with empty inventory
 		result:
 			as expected
 		
@@ -53,7 +53,7 @@ Manual test cases:
 		arrangements:
 			pick one player, hit Mentés button and then Játék kezdése button
 		expected result:
-			map is loaded which consists of sqaures with player's name on its head, with empty inventory
+			map is loaded which consists of squares with player's name on its head, with empty inventory
 			
 		step1:
 			step onto a storage
@@ -80,7 +80,7 @@ Manual test cases:
 		arrangements:
 			pick two players, hit Mentés button and then Játék kezdése button
 		expected result:
-			map is loaded which consists of sqaures with players' name on their head, with empty inventory
+			map is loaded which consists of squares with players' name on their head, with empty inventory
 		result:
 			as expected
 			
@@ -130,7 +130,7 @@ Manual test cases:
 		arrangements:
 			pick two players, hit Mentés button and then Játék kezdése button
 		expected result:
-			map is loaded which consists of sqaures with players' name on their head, with empty inventory
+			map is loaded which consists of squares with players' name on their head, with empty inventory
 		result:
 			as expected
 		
