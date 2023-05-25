@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - branch-kurumpli-soft-proj-lab
+      - kurumpli-soft-proj-lab
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
