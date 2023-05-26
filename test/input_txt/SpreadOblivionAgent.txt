@@ -1,0 +1,5 @@
+load spreadtest.txt
+listNeighbours
+step 5
+listThingsOnField
+spread Virologus2 Oblivion_agent

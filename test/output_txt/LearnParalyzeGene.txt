@@ -1,0 +1,13 @@
+Loading from file was successful
+Neighbour: Laboratory id: 1
+Neighbour: Laboratory id: 2
+Neighbour: Shelter id: 3
+Neighbour: Warehouse id: 4
+Neighbour: Field id: 5
+Stepped on Laboratory
+1. Oblivion_gene
+2. Paralyze_gene
+3. Invulnerability_gene
+4. Chorea_gene
+5. TestVirologus
+You have successfully learned Paralyze_gene

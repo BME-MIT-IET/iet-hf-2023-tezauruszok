@@ -1,0 +1,13 @@
+Loading from file was successful
+Neighbour: Laboratory id: 1
+Neighbour: Laboratory id: 2
+Neighbour: Shelter id: 3
+Neighbour: Warehouse id: 4
+Neighbour: Field id: 5
+Stepped on Field
+1. Virologus2
+2. TestVirologus
+You have successfully spreaded Paralyze_agent to Virologus2
+You have been spreaded with Paralyze_agent
+You have successfully spreaded back Paralyze_agent to TestVirologus
+Your Paralyze_agent has been spreaded back to you

@@ -1,0 +1,8 @@
+load spreadbacktest.txt
+listNeighbours
+step 5
+listThingsOnField
+spread Virologus2 Chorea_agent
+nextPlayer
+spreadingBack TestVirologus Chorea_agent
+nextPlayer

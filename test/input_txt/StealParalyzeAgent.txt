@@ -1,0 +1,5 @@
+load test.txt
+listNeighbours
+step 5
+listThingsOnField
+steal Paralyzed_agent ParalyzedVirologus

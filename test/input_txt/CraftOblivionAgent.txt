@@ -1,0 +1,2 @@
+load crafttest.txt
+craftAgent Oblivion_agent

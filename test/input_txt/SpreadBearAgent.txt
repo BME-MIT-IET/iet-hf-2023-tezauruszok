@@ -1,0 +1,4 @@
+load spreadtest3.txt
+listNeighbours
+step 5
+nextPlayer
