@@ -236,7 +236,7 @@ public class GameTable extends AbstractTableModel {
 	///Fieldhez gettert és settert adtam(Dávid)
 	public void addField(Field f){
 		for(int i=0; i<board.size(); i++){
-			if(board.get(i).getNumber()==f.getNumber()){
+			if(board.get(i).getNumber().equals(f.getNumber())){
 				return;
 			}
 		}
@@ -251,7 +251,7 @@ public class GameTable extends AbstractTableModel {
 	///Sorszám alapján getter
 	public Field getFieldSorszam(Integer sorszam){
 		for(int i=0; i<board.size(); i++){
-			if(board.get(i).getNumber()==sorszam){
+			if(board.get(i).getNumber().equals(sorszam)){
 				return board.get(i);
 			}
 		}

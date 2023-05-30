@@ -33,7 +33,7 @@ import java.util.List;
  *
  */
 public class OpeningMenu extends JFrame implements ActionListener {
-    JFrame frame=new JFrame("Vak virológusok világa");
+    JFrame frame=new JFrame("Vak virolï¿½gusok vilï¿½ga");
     ImageIcon icon=new ImageIcon(this.getClass().getResource("/resources/background.png" ));
     private String[] virologist_names={"Barb", "Andy", "Sarah", "Jake", "Mike", "Bob"};
     JList<String> list;
@@ -57,7 +57,7 @@ public class OpeningMenu extends JFrame implements ActionListener {
         JLabel label=new JLabel();
         label.setIcon(icon);
         label.setBounds(0,30, 300, 300);
-        cim.setText("Vak virológusok világa");
+        cim.setText("Vak virolï¿½gusok vilï¿½ga");
         cim.setForeground(Color.white);
         cim.setFont(new Font("Times New Roman", Font.BOLD, 30));
         cim.setBounds(150, 0, 300, 35);
@@ -65,7 +65,7 @@ public class OpeningMenu extends JFrame implements ActionListener {
         cim.setVerticalAlignment(JLabel.TOP);
         panel1.add(cim);
         panel1.add(label);
-        JButton start_gomb=new JButton("Játék kezdése");
+        JButton start_gomb=new JButton("Jï¿½tï¿½k kezdï¿½se");
         start_gomb.setName("start_gomb");
         start_gomb.addActionListener(this) ;
         start_gomb.setBounds(200,75,200,100);
@@ -77,9 +77,9 @@ public class OpeningMenu extends JFrame implements ActionListener {
         list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         scrollpane=new JScrollPane(list);
         scrollpane.setPreferredSize(new Dimension(120,120));
-        JLabel cim2=new JLabel("Válassza ki a játékosokat:");
+        JLabel cim2=new JLabel("Vï¿½lassza ki a jï¿½tï¿½kosokat:");
         JPanel panel3=new JPanel();
-        JButton kivalasztas=new JButton("Mentés");
+        JButton kivalasztas=new JButton("Mentï¿½s");
         kivalasztas.setName("kivalasztas");
         kivalasztas.addActionListener(this);
         panel3.add(cim2);
@@ -95,13 +95,13 @@ public class OpeningMenu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JButton b=(JButton) e.getSource();
         String name=b.getName();
-        if(name=="start_gomb"){
+        if(name.equals("start_gomb")){
             bezart=true;
             frame.dispose();
             game = new WindowV(chosennames);
             game.setVisible(true);
         }
-        if(name=="kivalasztas"){
+        if(name.equals("kivalasztas")){
            List<String>bejeloltek= list.getSelectedValuesList();
            chosennames = bejeloltek;
         }

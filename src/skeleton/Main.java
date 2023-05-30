@@ -31,7 +31,7 @@ public class Main {
         Skeleton s = new Skeleton();
 
         do {
-            System.out.println("Válassz egy tesztesetet:");
+            System.out.println("Vï¿½lassz egy tesztesetet:");
             System.out.println("1. player.Virologist steps on field");
             System.out.println("2. player.Virologist steps on storage");
             System.out.println("3. player.Virologist steps on laboratory");
@@ -49,7 +49,7 @@ public class Main {
             System.out.println("15. player.Virologist uses freeze agent");
             System.out.println("16. effect.Frozen virologist tries to move");
             System.out.println("17. Crazy virologist tries to move");
-            System.out.println("Q - Kilépés");
+            System.out.println("Q - Kilï¿½pï¿½s");
 
             answer = new Scanner(System.in).nextLine();
 
@@ -108,10 +108,10 @@ public class Main {
                 case "Q":
                     System.exit(0);
                 default:
-                    System.out.println("Nincs ilyen választási lehetõség.");
+                    System.out.println("Nincs ilyen vï¿½lasztï¿½si lehetï¿½sï¿½g.");
                     break;
             }
-        }while(answer != "Q");
+        }while(!answer.equals("Q"));
 
         return;
     }
