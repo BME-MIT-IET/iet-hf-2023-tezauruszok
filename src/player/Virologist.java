@@ -416,7 +416,7 @@ public class Virologist {
 		}
 		for (Agent a : agentCollection) {
 			if (a.getClass().equals(gc.getClass())) {
-				return agentCollection.indexOf(a);
+				return learnedCodes.indexOf(a);
 			}
 		}
 		return -1;
