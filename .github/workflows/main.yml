@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - kurumpli-soft-proj-lab
+      - String_and_boxed_types_compared_with_equal
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
 jobs:
