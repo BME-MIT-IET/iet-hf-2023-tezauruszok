@@ -9,6 +9,7 @@ package field;//
 
 
 import player.Virologist;
+import random.RandomContainer;
 import skeleton.Main;
 
 import java.util.Random;
@@ -24,20 +25,19 @@ public class Storage extends Field {
 		super(); // Counter miatt
 		Main.printMethod("field.Storage.field.Storage()", true);
 
-		regenerate();
+		regenerate(RandomContainer.rand);
 		Main.printMethod("Return", false);
 	}
 
 	///Megj:Felvettem plusz egy Konstruktort(Dávid)
 	public Storage(Integer fieldN){
 		super(fieldN);
-		regenerate();
+		regenerate(RandomContainer.rand);
 
 	}
 
-	private void regenerate() {
+	private void regenerate(Random rand) {
 		Main.printMethod("field.Storage.regenerate()", true);
-		Random rand = new Random();
 
 		aminoAcid = rand.nextInt(5) + 1;
 		nucleotide = rand.nextInt(5) + 1;
@@ -56,7 +56,7 @@ public class Storage extends Field {
 		v.increaseNucleotide(nucleotide);
 		v.increaseAminoAcid(aminoAcid);
 
-		regenerate();
+		regenerate(RandomContainer.rand);
 		Main.printMethod("Return", false);
 	}
 }
