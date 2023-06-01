@@ -1,5 +1,6 @@
 package game;
 
+import field.Laboratory;
 import game.OpeningMenu;
 import game.WindowV;
 import org.junit.jupiter.api.*;
@@ -24,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SwingUITest {
     private OpeningMenu menu;
     private Robot robot;
-    private final int idleTime = 750;
+    private final int idleTime = 600;
 
 
     /**
@@ -51,8 +52,87 @@ public class SwingUITest {
             e.printStackTrace();
         }
 
-        FieldV.Pos position = menu.getGame().getGtAtm().getCurrentPlayer().getMyField().view.getPos();
+        FieldV.Pos position = menu.getGame().getGtAtm().getPlayers().getLast().getMyField().view.getPos();
         return position.getX() == row && position.getY() == col;
+    }
+
+    public void openInventory(){
+        Point point = ((JPanel)menu.getGame().getContentPane().getComponent(0)).getComponent(3).getLocationOnScreen();
+        robot.mouseMove(point.x+ 5, point.y+5);
+
+        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+
+        try {
+            Thread.sleep(idleTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void closeInventory(){
+        Point point = ((JPanel)menu.getGame().getContentPane().getComponent(0)).getComponent(3).getLocationOnScreen();
+        robot.mouseMove(point.x, point.y+5+310);
+
+        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+
+        try {
+            Thread.sleep(idleTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void craftSomething(int seq){
+        openInventory();
+        robot.mouseMove(25, 60+15*seq);
+        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+
+        try {
+            Thread.sleep(idleTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void attackTarget(int id) {
+        Point point = ((JPanel) menu.getGame().getContentPane().getComponent(0)).getComponent(5).getLocationOnScreen();
+        robot.mouseMove(point.x + 22, point.y + 5);
+
+        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+
+        try {
+            Thread.sleep(idleTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        robot.mouseMove(point.x + 13, point.y +  (id+1) * 30);
+
+        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+
+        try {
+            Thread.sleep(idleTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        point = ((JPanel) menu.getGame().getContentPane().getComponent(0)).getComponent(6).getLocationOnScreen();
+        robot.mouseMove(point.x + 5, point.y + 5);
+
+        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+
+        try {
+            Thread.sleep(idleTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -164,7 +244,7 @@ public class SwingUITest {
         public void simpleStepAndPickupTest_StepOne() throws AWTException {
             // expected result:
             //			the player steps on the chosen field
-            assertTrue(stepOnTable(5, 4), "Step failed");
+            assertTrue(stepOnTable(5, 4), "step failed");
         }
 
         /**
@@ -177,8 +257,8 @@ public class SwingUITest {
         public void simpleStepAndPickupTest_StepTwo() throws AWTException {
             // expected result:
             //			the player steps on the chosen storage amino acid and nucleotide counters are increased by 20
-            assertTrue(stepOnTable(5, 4), "Step failed");
-            assertTrue(stepOnTable(5, 5), "Step failed");
+            assertTrue(stepOnTable(5, 4), "step failed");
+            assertTrue(stepOnTable(5, 5), "step failed");
 
             Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
             assertEquals(20, player.getAminoAcid());
@@ -195,9 +275,9 @@ public class SwingUITest {
         public void simpleStepAndPickupTest_StepThree() throws AWTException {
             // expected result:
             //			the player steps on the chosen bunker the equipment on the field is displayed in the inventory
-            assertTrue(stepOnTable(5, 4), "Step failed");
-            assertTrue(stepOnTable(5, 5), "Step failed");
-            assertTrue(stepOnTable(5, 6), "Step failed");
+            assertTrue(stepOnTable(5, 4), "step failed");
+            assertTrue(stepOnTable(5, 5), "step failed");
+            assertTrue(stepOnTable(5, 6), "step failed");
 
             Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
             assertEquals(1, player.getMyEquipment().size(), "inventory contains "+ player.getMyEquipment().size()+ " instances of the equipment on the field");
@@ -213,12 +293,12 @@ public class SwingUITest {
         public void simpleStepAndPickupTest_StepFour() throws AWTException {
             // expected result:
             //			the inventory should only contain the first 3 equipment
-            assertTrue(stepOnTable(5, 4), "Step failed");
-            assertTrue(stepOnTable(5, 5), "Step failed");
-            assertTrue(stepOnTable(5, 6), "Step failed");
-            assertTrue(stepOnTable(6, 6), "Step failed");
-            assertTrue(stepOnTable(7, 6), "Step failed");
-            assertTrue(stepOnTable(8, 6), "Step failed");
+            assertTrue(stepOnTable(5, 4), "step failed");
+            assertTrue(stepOnTable(5, 5), "step failed");
+            assertTrue(stepOnTable(5, 6), "step failed");
+            assertTrue(stepOnTable(6, 6), "step failed");
+            assertTrue(stepOnTable(7, 6), "step failed");
+            assertTrue(stepOnTable(8, 6), "step failed");
 
             Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
             int amount = player.getMyEquipment().size();
@@ -235,13 +315,13 @@ public class SwingUITest {
         public void simpleStepAndPickupTest_StepFive() throws AWTException {
             // expected result:
             //			the player steps on the chosen lab a genetic code which was on the field is displayed in the inventory
-            assertTrue(stepOnTable(5, 4), "Step failed");
-            assertTrue(stepOnTable(5, 5), "Step failed");
-            assertTrue(stepOnTable(5, 6), "Step failed");
-            assertTrue(stepOnTable(6, 6), "Step failed");
-            assertTrue(stepOnTable(7, 6), "Step failed");
-            assertTrue(stepOnTable(8, 6), "Step failed");
-            assertTrue(stepOnTable(8, 7), "Step failed");
+            assertTrue(stepOnTable(5, 4), "step failed");
+            assertTrue(stepOnTable(5, 5), "step failed");
+            assertTrue(stepOnTable(5, 6), "step failed");
+            assertTrue(stepOnTable(6, 6), "step failed");
+            assertTrue(stepOnTable(7, 6), "step failed");
+            assertTrue(stepOnTable(8, 6), "step failed");
+            assertTrue(stepOnTable(8, 7), "step failed");
 
             Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
             assertEquals(1, player.getLearnedCodes().size(), "Step failed");
@@ -257,16 +337,16 @@ public class SwingUITest {
         public void simpleStepAndPickupTest_StepSix() throws AWTException {
             // expected result:
             //			game should be over, the virologist should win
-            assertTrue(stepOnTable(5, 4), "Step failed");
-            assertTrue(stepOnTable(5, 5), "Step failed");
-            assertTrue(stepOnTable(5, 6), "Step failed");
-            assertTrue(stepOnTable(6, 6), "Step failed");
-            assertTrue(stepOnTable(7, 6), "Step failed");
-            assertTrue(stepOnTable(8, 6), "Step failed");
-            assertTrue(stepOnTable(8, 7), "Step failed");
-            assertTrue(stepOnTable(7, 7), "Step failed");
-            assertTrue(stepOnTable(6, 7), "Step failed");
-            assertTrue(stepOnTable(5, 7), "Step failed");
+            assertTrue(stepOnTable(5, 4), "step failed");
+            assertTrue(stepOnTable(5, 5), "step failed");
+            assertTrue(stepOnTable(5, 6), "step failed");
+            assertTrue(stepOnTable(6, 6), "step failed");
+            assertTrue(stepOnTable(7, 6), "step failed");
+            assertTrue(stepOnTable(8, 6), "step failed");
+            assertTrue(stepOnTable(8, 7), "step failed");
+            assertTrue(stepOnTable(7, 7), "step failed");
+            assertTrue(stepOnTable(6, 7), "step failed");
+            assertTrue(stepOnTable(5, 7), "step failed");
 
             Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
             GameTable game = menu.getGame().getGtAtm();
@@ -301,8 +381,8 @@ public class SwingUITest {
         public void SackAndJacketEffectTest_StepOne() throws AWTException {
             // expected result:
             //			amino acid and nucleotide counters are increased by 20
-            assertTrue(stepOnTable(5, 4), "Step failed");
-            assertTrue(stepOnTable(5, 5), "Step failed");
+            assertTrue(stepOnTable(5, 4), "step failed");
+            assertTrue(stepOnTable(5, 5), "step failed");
 
             Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
             assertEquals(20, player.getAminoAcid());
@@ -319,9 +399,9 @@ public class SwingUITest {
         public void SackAndJacketEffectTest_StepTwo() throws AWTException {
             // expected result:
             //			inventory contains sack
-            assertTrue(stepOnTable(5, 4), "Step failed");
-            assertTrue(stepOnTable(5, 5), "Step failed");
-            assertTrue(stepOnTable(5, 6), "Step failed");
+            assertTrue(stepOnTable(5, 4), "step failed");
+            assertTrue(stepOnTable(5, 5), "step failed");
+            assertTrue(stepOnTable(5, 6), "step failed");
 
             Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
             assertEquals(1, player.getMyEquipment().size(), "inventory contains "+ player.getMyEquipment().size()+ " instances of the equipment on the field");
@@ -339,10 +419,10 @@ public class SwingUITest {
             //			amino acid and nucleotide counters are increased by 21
             Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
 
-            assertTrue(stepOnTable(5, 4), "Step failed");
-            assertTrue(stepOnTable(5, 5), "Step failed");
-            assertTrue(stepOnTable(5, 6), "Step failed");
-            assertTrue(stepOnTable(5, 5), "Step failed");
+            assertTrue(stepOnTable(5, 4), "step failed");
+            assertTrue(stepOnTable(5, 5), "step failed");
+            assertTrue(stepOnTable(5, 6), "step failed");
+            assertTrue(stepOnTable(5, 5), "step failed");
 
             assertEquals(20+21, player.getAminoAcid(), "sometimes amino acid count and the label value is inconsistent");
             assertEquals(20+21, player.getNucleotide(), "sometimes nucleotid count and the label value is inconsistent");
@@ -406,7 +486,221 @@ public class SwingUITest {
         public void TwoVirologistsInteractionsTest_StepOne(){
             // expected result:
             //			two players are on the same field one of them covers the other
-            assertTrue(stepOnTable(5, 4), "Step failed");
+            assertTrue(stepOnTable(5, 4), "step failed");
+
+        }
+
+        /**
+         * Part of the "Two virologists interactions test"
+         * step2:
+         * 			with player two steps on a storage, with player one just wanders on simple fields
+         */
+        @Test
+        @Order(2)
+        public void TwoVirologistsInteractionsTest_StepTwo(){
+            // expected result:
+            //			player two's amino acid and nucleotide counter increased by 20, nothing happens to player one
+            LinkedList<Virologist> virologists= menu.getGame().getGtAtm().getPlayers();
+            Virologist firstPlayer = virologists.get(0);
+            Virologist secondPlayer = virologists.get(1);
+
+            // first player steps on other player's field
+            assertTrue(stepOnTable(5, 4), "step failed");
+            // second player steps on a storage
+            assertTrue(stepOnTable(5, 5), "step failed");
+            // first player just wanders on simple fields
+            assertTrue(stepOnTable(5, 3), "step failed");
+
+
+
+            // First player's inventory should be empty
+            assertEquals(0, firstPlayer.getAminoAcid(), "First player should not have any amino-acid");
+            assertEquals(0, firstPlayer.getNucleotide(), "First player should not have any nucleotide");
+
+            // Second player should have some resources
+            assertEquals(20, secondPlayer.getAminoAcid(), "second player should have amino-acid");
+            assertEquals(20, secondPlayer.getNucleotide(), "second player should have nucleotide");
+        }
+
+        /**
+         * Part of the "Two virologists interactions test"
+         * step3:
+         * 			with player two steps on a lab, with player one just wander on simple fields
+         */
+        @Test
+        @Order(3)
+        public void TwoVirologistsInteractionsTest_StepThree(){
+            // expected result:
+            //			player two's inventory displays the genetic code from the lab, nothing happens to player one
+            LinkedList<Virologist> virologists= menu.getGame().getGtAtm().getPlayers();
+            Virologist firstPlayer = virologists.getFirst();
+            Virologist secondPlayer = virologists.getLast();
+
+            // first player steps on other player's field
+            assertTrue(stepOnTable(5, 4), "step failed");
+            // second player steps on a Storage
+            assertTrue(stepOnTable(5, 5), "step failed");
+            // first player just wanders on simple fields
+            assertTrue(stepOnTable(5, 3), "step failed");
+            // second player steps on a Bunker
+            assertTrue(stepOnTable(5, 6), "step failed");
+            // first player just wanders on simple fields
+            assertTrue(stepOnTable(5, 2), "step failed");
+            // second player steps on a Lab
+            assertTrue(stepOnTable(5, 7), "step failed");
+            // first player just wanders on simple fields
+            assertTrue(stepOnTable(5, 1), "step failed");
+
+            openInventory();
+            assertEquals(1, secondPlayer.getLearnedCodes().size());
+            closeInventory();
+
+
+        }
+
+
+        /**
+         * Part of the "Two virologists interactions test"
+         * step4:
+         * 			create a virus with the known genetic code with player two
+         */
+        @Test
+        @Order(4)
+        public void TwoVirologistsInteractionsTest_StepFour(){
+            // expected result:
+            //			player two's inventory displays the virus created from genetic code,
+            //			player two's amino acid and nucleotide counter decreased by the cost of the virus
+            LinkedList<Virologist> virologists= menu.getGame().getGtAtm().getPlayers();
+            Virologist firstPlayer = virologists.getFirst();
+            Virologist secondPlayer = virologists.getLast();
+
+            // first player steps on other player's field
+            assertTrue(stepOnTable(5, 4), "step failed");
+            // second player steps on a Storage
+            assertTrue(stepOnTable(5, 5), "step failed");
+            // first player just wanders on simple fields
+            assertTrue(stepOnTable(5, 3), "step failed");
+            // second player steps on a Bunker
+            assertTrue(stepOnTable(5, 6), "step failed");
+            // first player just wanders on simple fields
+            assertTrue(stepOnTable(5, 2), "step failed");
+            // second player steps on a Lab
+            assertTrue(stepOnTable(5, 7), "step failed");
+            // first player just wanders on simple fields
+            assertTrue(stepOnTable(5, 1), "step failed");
+
+            craftSomething(0);
+
+            assertEquals(1, secondPlayer.getAgentCollection().size());
+            assertEquals(10, secondPlayer.getNucleotide());
+            assertEquals(10, secondPlayer.getAminoAcid());
+        }
+
+
+        /**
+         * Part of the "Two virologists interactions test"
+         * step5:
+         * 			step onto the same field with the two players
+         */
+        @Test
+        @Order(5)
+        public void TwoVirologistsInteractionsTest_StepFive(){
+            // expected result:
+            //			two players are on the same field one of them covers the other
+            LinkedList<Virologist> virologists= menu.getGame().getGtAtm().getPlayers();
+            Virologist firstPlayer = virologists.getFirst();
+            Virologist secondPlayer = virologists.getLast();
+
+            // first player steps on other player's field
+            assertTrue(stepOnTable(5, 4), "step failed");
+            // second player steps on a Storage
+            assertTrue(stepOnTable(5, 5), "step failed");
+            // first player just wanders on simple fields
+            assertTrue(stepOnTable(5, 3), "step failed");
+            // second player steps on a Bunker
+            assertTrue(stepOnTable(5, 6), "step failed");
+            // first player just wanders on simple fields
+            assertTrue(stepOnTable(5, 2), "step failed");
+            // second player steps on a Lab
+            assertTrue(stepOnTable(5, 7), "step failed");
+            // first player just wanders on simple fields
+            assertTrue(stepOnTable(5, 1), "step failed");
+
+            craftSomething(0);
+            closeInventory();
+
+            // second player follows first
+            assertTrue(stepOnTable(5, 6), "step failed");
+            // first player wants to meet
+            assertTrue(stepOnTable(5, 2), "step failed");
+            // second player follows first
+            assertTrue(stepOnTable(5, 5), "step failed");
+            // first player wants to meet
+            assertTrue(stepOnTable(5, 3), "step failed");
+            // second player follows first
+            assertTrue(stepOnTable(5, 4), "step failed");
+            // first player wants to meet
+            assertTrue(stepOnTable(5, 4), "step failed");
+
+            assertSame(firstPlayer.getMyField(), secondPlayer.getMyField());
+
+        }
+
+        /**
+         * Part of the "Two virologists interactions test"
+         * 	step6:
+         * 			use the virus with player two on player one
+         */
+        @Test
+        @Order(6)
+        public void TwoVirologistsInteractionsTest_StepSix(){
+            // expected result:
+            //			player one's inventory displays the effect that
+            //			the virus caused player two's inventory does not contain the used virus
+            LinkedList<Virologist> virologists= menu.getGame().getGtAtm().getPlayers();
+            Virologist firstPlayer = virologists.getFirst();
+            Virologist secondPlayer = virologists.getLast();
+
+            // first player steps on other player's field
+            assertTrue(stepOnTable(5, 4), "step failed");
+            // second player steps on a Storage
+            assertTrue(stepOnTable(5, 5), "step failed");
+            // first player just wanders on simple fields
+            assertTrue(stepOnTable(5, 3), "step failed");
+            // second player steps on a Bunker
+            assertTrue(stepOnTable(5, 6), "step failed");
+            // first player just wanders on simple fields
+            assertTrue(stepOnTable(5, 2), "step failed");
+            // second player steps on a Lab
+            assertTrue(stepOnTable(5, 7), "step failed");
+            // first player just wanders on simple fields
+            assertTrue(stepOnTable(5, 1), "step failed");
+
+            craftSomething(0);
+            closeInventory();
+
+            // second player follows first
+            assertTrue(stepOnTable(5, 6), "step failed");
+            // first player wants to meet
+            assertTrue(stepOnTable(5, 2), "step failed");
+            // second player follows first
+            assertTrue(stepOnTable(5, 5), "step failed");
+            // first player wants to meet
+            assertTrue(stepOnTable(5, 3), "step failed");
+            // second player follows first
+            assertTrue(stepOnTable(5, 4), "step failed");
+            // first player wants to meet
+            assertTrue(stepOnTable(5, 4), "step failed");
+
+            attackTarget(1);
+            // second player runs away
+            assertTrue(stepOnTable(5, 3), "step failed");
+
+            openInventory();
+
+            assertEquals(1, firstPlayer.getEffects().size());
+
+            closeInventory();
 
         }
 
@@ -417,6 +711,7 @@ public class SwingUITest {
             }
             catch (Exception ignored){
             }
+
         }
     }
 }
