@@ -702,6 +702,14 @@ public class SwingUITest {
 
             closeInventory();
 
+            // first player steps away
+            assertTrue(stepOnTable(4, 4), "step failed");
+
+            openInventory();
+
+            assertEquals(0, firstPlayer.getAgentCollection().size());
+
+            closeInventory();
         }
 
         @AfterEach
@@ -714,5 +722,233 @@ public class SwingUITest {
 
         }
     }
+
+    @Nested
+    @Order(4)
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    class EffectTest {
+        @BeforeEach
+        public void arrangeWithTwoPlayer() throws AWTException {
+            arrangeHelper(true);
+        }
+
+        /**
+         * Part of the "Two virologists interactions test"
+         * arrangements:
+         * 			pick two players, hit Mentés button and then "Játék kezdése" button
+         */
+        @Test
+        @Order(0)
+        public void openingGameTwoPlayer() throws AWTException {
+            LinkedList<Virologist> virologists= menu.getGame().getGtAtm().getPlayers();
+
+            // expected result:
+            //			map is loaded which consists of squares with players' name on their head, with empty inventory (two of them)
+
+            // Virologist amount check
+            assertEquals(2, virologists.size(), "There are " + virologists.size() + " should be two!");
+
+            // Virologist name check
+            assertEquals("Barb", virologists.get(0).getName(), "Player name is not correct!");
+            assertEquals("Andy", virologists.get(1).getName(), "Player name is not correct!");
+
+            // Virologist inventory check
+            int inventoryCount = virologists.get(0).getMyEquipment().size() + virologists.get(0).getAgentCollection().size() + virologists.get(0).getEffects().size() + virologists.get(0).getLearnedCodes().size();
+            assertEquals(0, inventoryCount, "Inventory is not empty for "+ virologists.get(0).getName() +"!");
+
+            inventoryCount = virologists.get(1).getMyEquipment().size() + virologists.get(1).getAgentCollection().size() + virologists.get(1).getEffects().size() + virologists.get(1).getLearnedCodes().size();
+            assertEquals(0, inventoryCount, "Inventory is not empty for "+ virologists.get(1).getName() +"!");
+        }
+
+        /**
+         * Part of the "Effect test"
+         * step1:
+         * 			with player two step on a sack with player one wander on simple fields
+         */
+        @Test
+        @Order(1)
+        public void TwoVirologistsInteractionsTest_StepOne(){
+            // expected result:
+            //			player two's inventory contains sack
+
+            LinkedList<Virologist> virologists= menu.getGame().getGtAtm().getPlayers();
+            Virologist playerone = virologists.getFirst();
+            Virologist playertwo = virologists.getLast();
+
+            //player 1
+            assertTrue(stepOnTable(5, 4), "step failed");
+            //player 2
+            assertTrue(stepOnTable(5, 5), "step failed");
+            //player 1
+            assertTrue(stepOnTable(4, 4), "step failed");
+            //player 2
+            assertTrue(stepOnTable(5, 6), "step failed");
+            //player 1
+            assertTrue(stepOnTable(3, 4), "step failed");
+
+            //player 2
+            openInventory();
+            assertEquals(1, playertwo.getMyEquipment().size());
+            closeInventory();
+            //
+        }
+
+        /**
+         * Part of the "Effect test"
+         * step2:
+         * 			with player two step through every storage, with player one step on a storage
+         */
+        @Test
+        @Order(2)
+        public void TwoVirologistsInteractionsTest_StepTwo(){
+            // expected result:
+            //			player two's amino acid and nucleotide counter increased to 80
+            //			player one's amino acid and nucleotide counter increased by 20
+
+            LinkedList<Virologist> virologists= menu.getGame().getGtAtm().getPlayers();
+            Virologist playerone = virologists.getFirst();
+            Virologist playertwo = virologists.getLast();
+
+            //player 1
+            assertTrue(stepOnTable(5, 4), "step failed");
+            //player 2
+            assertTrue(stepOnTable(5, 5), "step failed");
+            //player 1
+            assertTrue(stepOnTable(5, 5), "step failed");
+            //player 2
+            assertTrue(stepOnTable(5, 6), "step failed");
+            //player 1
+            assertTrue(stepOnTable(5, 4), "step failed");
+            //player 2
+            assertTrue(stepOnTable(5, 5), "step failed");
+            //player 1
+            assertTrue(stepOnTable(5, 3), "step failed");
+            //player 2
+            assertTrue(stepOnTable(6, 5), "step failed");
+            //player 1
+            assertTrue(stepOnTable(5, 2), "step failed");
+            //player 2
+            assertTrue(stepOnTable(7, 5), "step failed");
+            //player 1
+            assertTrue(stepOnTable(5, 1), "step failed");
+            //player 2
+            assertTrue(stepOnTable(8, 5), "step failed");
+
+            //player 1
+            assertEquals(20, playerone.getNucleotide());
+            assertEquals(20, playerone.getAminoAcid());
+            assertTrue(stepOnTable(5, 0), "step failed");
+            //
+            //player 2
+            assertEquals(80, playertwo.getNucleotide());
+            assertEquals(80, playertwo.getAminoAcid());
+            //
+        }
+
+
+        /**
+         * Part of the "Effect test"
+         * step3:
+         * 			with player two step on second lab then step there with player one
+         */
+        @Test
+        @Order(3)
+        public void TwoVirologistsInteractionsTest_StepThree(){
+            // expected result:
+            //			two players are on the same field one of them covers the other
+            //			both inventories contain forget genetic code
+
+            LinkedList<Virologist> virologists= menu.getGame().getGtAtm().getPlayers();
+            Virologist playerone = virologists.getFirst();
+            Virologist playertwo = virologists.getLast();
+
+            //player 1
+            assertTrue(stepOnTable(5, 4), "step failed");
+            //player 2
+            assertTrue(stepOnTable(5, 5), "step failed");
+            //player 1
+            assertTrue(stepOnTable(5, 5), "step failed");
+            //player 2
+            assertTrue(stepOnTable(5, 6), "step failed");
+            //player 1
+            assertTrue(stepOnTable(5, 4), "step failed");
+            //player 2
+            assertTrue(stepOnTable(5, 5), "step failed");
+            //player 1
+            assertTrue(stepOnTable(5, 3), "step failed");
+            //player 2
+            assertTrue(stepOnTable(6, 5), "step failed");
+            //player 1
+            assertTrue(stepOnTable(5, 2), "step failed");
+            //player 2
+            assertTrue(stepOnTable(7, 5), "step failed");
+            //player 1
+            assertTrue(stepOnTable(5, 1), "step failed");
+            //player 2
+            assertTrue(stepOnTable(8, 5), "step failed");
+
+            //player 1
+            assertTrue(stepOnTable(4, 1), "step failed");
+            //player 2
+            assertTrue(stepOnTable(9, 5), "step failed");
+            //player 1
+            assertTrue(stepOnTable(4, 2), "step failed");
+            //player 2
+            assertTrue(stepOnTable(9, 6), "step failed");
+            //player 1
+            assertTrue(stepOnTable(4, 3), "step failed");
+            //player 2
+            assertTrue(stepOnTable(9, 7), "step failed");
+            //player 1
+            assertTrue(stepOnTable(4, 4), "step failed");
+            //player 2
+            assertTrue(stepOnTable(9, 8), "step failed");
+            //player 1
+            assertTrue(stepOnTable(4, 5), "step failed");
+            //player 2
+            assertTrue(stepOnTable(8, 8), "step failed");
+            //player 1
+            assertTrue(stepOnTable(4, 6), "step failed");
+            //player 2
+            assertTrue(stepOnTable(7, 8), "step failed");
+            //player 1
+            assertTrue(stepOnTable(4, 7), "step failed");
+            //player 2
+            assertTrue(stepOnTable(6, 8), "step failed");
+            //player 1
+            assertTrue(stepOnTable(4, 8), "step failed");
+            //player 2
+            assertTrue(stepOnTable(6, 7), "step failed");
+            //player 1
+            assertTrue(stepOnTable(5, 8), "step failed");
+            //player 2
+            assertTrue(stepOnTable(6, 8), "step failed");
+            //player 1
+            assertTrue(stepOnTable(6, 8), "step failed");
+            //player 2
+            openInventory();
+            assertEquals(1, playertwo.getLearnedCodes().size());
+            closeInventory();
+            assertTrue(stepOnTable(6, 7), "step failed");
+            //player 1
+            assertTrue(stepOnTable(6, 7), "step failed");
+            openInventory();
+            assertEquals(1, playerone.getLearnedCodes().size());
+            closeInventory();
+        }
+
+
+
+        @AfterEach
+        public void closeGameWindow(){
+            try{
+                menu.getGame().dispose();
+            }
+            catch (Exception ignored){
+            }
+
+        }
+    }
+
 }
 
