@@ -205,4 +205,9 @@ public class WindowV extends JFrame {
         this.setVisible(true);
         // draw other stuff
     }
+
+    // It is needed to have it available for the SwingUITest class
+    public GameTable getGtAtm(){
+        return gtAtm;
+    }
 }
