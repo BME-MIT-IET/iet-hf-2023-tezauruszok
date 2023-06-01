@@ -243,6 +243,66 @@ public class SwingUITest {
         assertTrue(game.getWinGame(), "games goes on");
     }
 
+    /**
+     * Part of the "Sack and jacket effect test:"
+     * Step 1:
+     *      step onto a storage
+     */
+    @Test
+    @Order(7)
+    public void SackAndJacketEffectTest_StepOne() throws AWTException {
+        // expected result:
+        //			amino acid and nucleotide counters are increased by 20
+        assertTrue(stepOnTable(5, 4), "Nem jó");
+        assertTrue(stepOnTable(5, 5), "Nem jó");
+
+        Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
+        assertEquals(20, player.getAminoAcid());
+        assertEquals(20, player.getNucleotide());
+    }
+
+    /**
+     * Part of the "Sack and jacket effect test:"
+     * Step 2:
+     *      step onto the bunker with sack
+     */
+    @Test
+    @Order(8)
+    public void SackAndJacketEffectTest_StepTwo() throws AWTException {
+        // expected result:
+        //			inventory contains sack
+        assertTrue(stepOnTable(5, 4), "Nem jó");
+        assertTrue(stepOnTable(5, 5), "Nem jó");
+        assertTrue(stepOnTable(5, 6), "Nem jó");
+
+        Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
+        assertEquals(1, player.getMyEquipment().size(), "inventory contains "+ player.getMyEquipment().size()+ " instances of the equipment on the field");
+    }
+
+    /**
+     * Part of the "Sack and jacket effect test:"
+     * Step 3:
+     *      step onto a storage
+     */
+    @Test
+    @Order(9)
+    public void SackAndJacketEffectTest_StepThree() throws AWTException {
+        // expected result:
+        //			amino acid and nucleotide counters are increased by 21
+        Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
+
+        assertTrue(stepOnTable(5, 4), "Nem jó");
+//        System.out.println(player.getNucleotide());
+        assertTrue(stepOnTable(5, 5), "Nem jó");
+//        System.out.println(player.getNucleotide());
+        assertTrue(stepOnTable(5, 6), "Nem jó");
+//        System.out.println(player.getNucleotide());
+        assertTrue(stepOnTable(5, 5), "Nem jó");
+//        System.out.println(player.getNucleotide());
+
+        assertEquals(20+21, player.getAminoAcid(), "amino acid count and the label value is inconsistent");
+        assertEquals(20+21, player.getNucleotide(), "nucleotid count and the label value is inconsistent");
+    }
 
     @AfterEach
     public void closeGameWindow(){
