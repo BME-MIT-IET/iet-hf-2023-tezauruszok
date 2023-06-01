@@ -10,9 +10,11 @@ import player.Virologist;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -22,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SwingUITest {
     private OpeningMenu menu;
     private Robot robot;
-    private final int idleTime = 500;
+    private final int idleTime = 750;
 
 
     /**
@@ -54,9 +56,10 @@ public class SwingUITest {
     }
 
     /**
-     * Opens main menu, chooses a player, and then starts the game
+     * Opens main menu, chooses one or two players depending on the parameter, and then starts the game
+     * @param multiplayer select one more player?s
      */
-    public void arrangeWithOneHelper() throws AWTException {
+    public void arrangeHelper(boolean multiplayer) throws AWTException {
         // Starting game
         menu = new OpeningMenu();
 
@@ -69,25 +72,45 @@ public class SwingUITest {
         robot.mouseMove(buttonX, buttonY);
 
         try {
-            Thread.sleep(500);
+            Thread.sleep(idleTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+
+        ////
+        if(multiplayer){
+            int buttonX2 = nameLocation.x + 20; // Offset for button size and borders
+            int buttonY2 = nameLocation.y + 30;
+            robot.mouseMove(buttonX2, buttonY2);
+
+            try {
+                Thread.sleep(idleTime);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Shift should be pressed while selecting
+            robot.keyPress(KeyEvent.VK_SHIFT);
+            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+            robot.keyRelease(KeyEvent.VK_SHIFT);
+        }
+        ////
 
         // Press save button
         Point saveLocation = ((JPanel)((JPanel)menu.frame.getContentPane().getComponent(0)).getComponent(2)).getComponent(2).getLocationOnScreen();
         robot.mouseMove(saveLocation.x+5, saveLocation.y+5);
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+
         try {
             Thread.sleep(idleTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 
         // Press start game button
         Point startLocation = (((JPanel)menu.frame.getContentPane().getComponent(1)).getComponent(0).getLocationOnScreen());
@@ -103,13 +126,14 @@ public class SwingUITest {
     }
 
 
+
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     @Nested
     @Order(1)
-    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class SimpleStepAndPickUpTest{
         @BeforeEach
         public void arrangeWithOnePlayer() throws AWTException {
-            arrangeWithOneHelper();
+            arrangeHelper(false);
         }
 
         /**
@@ -141,8 +165,6 @@ public class SwingUITest {
             // expected result:
             //			the player steps on the chosen field
             assertTrue(stepOnTable(5, 4), "Step failed");
-
-
         }
 
         /**
@@ -261,13 +283,13 @@ public class SwingUITest {
         }
     }
 
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     @Nested
     @Order(2)
-    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class SackAndJackEffectTest{
         @BeforeEach
         public void arrangeWithOnePlayer() throws AWTException {
-            arrangeWithOneHelper();
+            arrangeHelper(false);
         }
         /**
          * Part of the "Sack and jacket effect test:"
@@ -340,80 +362,61 @@ public class SwingUITest {
     @Nested
     @Order(3)
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-    class TwoVirologistsInteractionsTest{
+    class TwoVirologistsInteractionsTest {
         @BeforeEach
         public void arrangeWithTwoPlayer() throws AWTException {
-
-        }
-    }
-
-
-
-
-
-//    @BeforeEach
-
-    public void arrangeWithTwoPlayer() throws AWTException {
-
-        // Starting game
-        menu = new OpeningMenu();
-
-        robot = new Robot();
-
-        // Choosing player's name
-        Point nameLocation = menu.scrollpane.getLocationOnScreen();
-        int buttonX = nameLocation.x + 20; // Offset for button size and borders
-        int buttonY = nameLocation.y + 10;
-        robot.mouseMove(buttonX, buttonY);
-
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            arrangeHelper(true);
         }
 
-        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+        /**
+         * Part of the "Two virologists interactions test"
+         * arrangements:
+         * 			pick two players, hit Mentés button and then "Játék kezdése" button
+         */
+        @Test
+        @Order(0)
+        public void openingGameTwoPlayer() throws AWTException {
+            LinkedList<Virologist> virologists= menu.getGame().getGtAtm().getPlayers();
 
-        //////
+            // expected result:
+            //			map is loaded which consists of squares with players' name on their head, with empty inventory (two of them)
 
-        int buttonX2 = nameLocation.x + 20; // Offset for button size and borders
-        int buttonY2 = nameLocation.y + 30;
-        robot.mouseMove(buttonX2, buttonY2);
+            // Virologist amount check
+            assertEquals(2, virologists.size(), "There are " + virologists.size() + " should be two!");
 
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            // Virologist name check
+            assertEquals("Barb", virologists.get(0).getName(), "Player name is not correct!");
+            assertEquals("Andy", virologists.get(1).getName(), "Player name is not correct!");
+
+            // Virologist inventory check
+            int inventoryCount = virologists.get(0).getMyEquipment().size() + virologists.get(0).getAgentCollection().size() + virologists.get(0).getEffects().size() + virologists.get(0).getLearnedCodes().size();
+            assertEquals(0, inventoryCount, "Inventory is not empty for "+ virologists.get(0).getName() +"!");
+
+            inventoryCount = virologists.get(1).getMyEquipment().size() + virologists.get(1).getAgentCollection().size() + virologists.get(1).getEffects().size() + virologists.get(1).getLearnedCodes().size();
+            assertEquals(0, inventoryCount, "Inventory is not empty for "+ virologists.get(1).getName() +"!");
         }
 
-        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+        /**
+         * Part of the "Two virologists interactions test"
+         * step1:
+         * 			step onto the other players field
+         */
+        @Test
+        @Order(1)
+        public void TwoVirologistsInteractionsTest_StepOne(){
+            // expected result:
+            //			two players are on the same field one of them covers the other
+            assertTrue(stepOnTable(5, 4), "Step failed");
 
-        //////
-
-        // Press save button
-        Point saveLocation = ((JPanel)((JPanel)menu.frame.getContentPane().getComponent(0)).getComponent(2)).getComponent(2).getLocationOnScreen();
-        robot.mouseMove(saveLocation.x+5, saveLocation.y+5);
-        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-        try {
-            Thread.sleep(idleTime);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
 
-
-        // Press start game button
-        Point startLocation = (((JPanel)menu.frame.getContentPane().getComponent(1)).getComponent(0).getLocationOnScreen());
-        robot.mouseMove(startLocation.x+5, startLocation.y+5);
-        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-
-        try {
-            Thread.sleep(idleTime);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        @AfterEach
+        public void closeGameWindow(){
+            try{
+                menu.getGame().dispose();
+            }
+            catch (Exception ignored){
+            }
         }
     }
 }
