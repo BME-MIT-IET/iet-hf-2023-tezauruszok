@@ -354,6 +354,9 @@ public class GameTable extends AbstractTableModel {
 	public void setWinGame(boolean b) {
 		winGame = b;
 	}
+	public boolean getWinGame() {
+		return winGame;
+	}
 
 	public Virologist getPlayer(int id) throws Exception{
 		return players.get(id);

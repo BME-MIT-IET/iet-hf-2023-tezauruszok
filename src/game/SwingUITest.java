@@ -4,6 +4,7 @@ import game.OpeningMenu;
 import game.WindowV;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import player.GameTable;
 import player.Virologist;
 
 import javax.swing.*;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SwingUITest {
     private JFrame frame;
     private JPanel panel1;
@@ -108,6 +109,7 @@ public class SwingUITest {
      * 			pick one player, hit "Mentés" button and then "Játék kezdése" button
      */
     @Test
+    @Order(0)
     public void openingGameOnePlayer() throws AWTException {
         Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
 
@@ -126,6 +128,7 @@ public class SwingUITest {
      *      Click on the field next to the player
      */
     @Test
+    @Order(1)
     public void simpleStepAndPickupTest_StepOne() throws AWTException {
         // expected result:
         //			the player steps on the chosen field
@@ -133,6 +136,113 @@ public class SwingUITest {
 
 
     }
+
+    /**
+     * Part of the "Simple step and pick up test"
+     * Step 2:
+     *      click on the storage next to the player
+     */
+    @Test
+    @Order(2)
+    public void simpleStepAndPickupTest_StepTwo() throws AWTException {
+        // expected result:
+        //			the player steps on the chosen storage amino acid and nucleotide counters are increased by 20
+        assertTrue(stepOnTable(5, 4), "Nem jó");
+        assertTrue(stepOnTable(5, 5), "Nem jó");
+
+        Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
+        assertEquals(20, player.getAminoAcid());
+        assertEquals(20, player.getNucleotide());
+    }
+
+    /**
+     * Part of the "Simple step and pick up test"
+     * Step 3:
+     *      click on the bunker next to the player
+     */
+    @Test
+    @Order(3)
+    public void simpleStepAndPickupTest_StepThree() throws AWTException {
+        // expected result:
+        //			the player steps on the chosen bunker the equipment on the field is displayed in the inventory
+        assertTrue(stepOnTable(5, 4), "Nem jó");
+        assertTrue(stepOnTable(5, 5), "Nem jó");
+        assertTrue(stepOnTable(5, 6), "Nem jó");
+
+        Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
+        assertEquals(1, player.getMyEquipment().size(), "inventory contains "+ player.getMyEquipment().size()+ " instances of the equipment on the field");
+    }
+
+    /**
+     * Part of the "Simple step and pick up test"
+     * Step 4:
+     *      step down until the last bunker
+     */
+    /*TODO: ATNEZNI MIERT CSAK AZ ELSO 3-NAK SZABAD NALA LENNIE?*/
+    @Test
+    @Order(4)
+    public void simpleStepAndPickupTest_StepFour() throws AWTException {
+        // expected result:
+        //			the inventory should only contain the first 3 equipment
+        assertTrue(stepOnTable(5, 4), "Nem jó");
+        assertTrue(stepOnTable(5, 5), "Nem jó");
+        assertTrue(stepOnTable(5, 6), "Nem jó");
+        assertTrue(stepOnTable(6, 6), "Nem jó");
+        assertTrue(stepOnTable(7, 6), "Nem jó");
+        assertTrue(stepOnTable(8, 6), "Nem jó");
+
+        Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
+        assertEquals(3, player.getMyEquipment().size(), "the inventory contains all kinds of equipment");
+    }
+
+    /**
+     * Part of the "Simple step and pick up test"
+     * Step 5:
+     *      click on the lab next to the player
+     */
+    @Test
+    @Order(5)
+    public void simpleStepAndPickupTest_StepFive() throws AWTException {
+        // expected result:
+        //			the player steps on the chosen lab a genetic code which was on the field is displayed in the inventory
+        assertTrue(stepOnTable(5, 4), "Nem jó");
+        assertTrue(stepOnTable(5, 5), "Nem jó");
+        assertTrue(stepOnTable(5, 6), "Nem jó");
+        assertTrue(stepOnTable(6, 6), "Nem jó");
+        assertTrue(stepOnTable(7, 6), "Nem jó");
+        assertTrue(stepOnTable(8, 6), "Nem jó");
+        assertTrue(stepOnTable(8, 7), "Nem jó");
+
+        Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
+        assertEquals(1, player.getLearnedCodes().size(), "Nem jó");
+    }
+
+    /**
+     * Part of the "Simple step and pick up test"
+     * Step 6:
+     *      step up until the last lab
+     */
+    @Test
+    @Order(6)
+    public void simpleStepAndPickupTest_StepSix() throws AWTException {
+        // expected result:
+        //			game should be over, the virologist should win
+        assertTrue(stepOnTable(5, 4), "Nem jó");
+        assertTrue(stepOnTable(5, 5), "Nem jó");
+        assertTrue(stepOnTable(5, 6), "Nem jó");
+        assertTrue(stepOnTable(6, 6), "Nem jó");
+        assertTrue(stepOnTable(7, 6), "Nem jó");
+        assertTrue(stepOnTable(8, 6), "Nem jó");
+        assertTrue(stepOnTable(8, 7), "Nem jó");
+        assertTrue(stepOnTable(7, 7), "Nem jó");
+        assertTrue(stepOnTable(6, 7), "Nem jó");
+        assertTrue(stepOnTable(5, 7), "Nem jó");
+
+        Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
+        GameTable game = menu.getGame().getGtAtm();
+        assertTrue(game.getWinGame(), "games goes on");
+    }
+
 
     @AfterEach
     public void closeGameWindow(){
