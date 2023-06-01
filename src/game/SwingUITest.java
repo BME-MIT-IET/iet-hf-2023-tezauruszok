@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class SwingUITest {
@@ -24,138 +24,10 @@ public class SwingUITest {
 
     private OpeningMenu menu;
     private Robot robot;
+    private final int idleTime = 500;
 
-//    @BeforeEach
-//    @Test
-    public void setUp() {
-        SwingUtilities.invokeLater(() -> {
-//            frame = new JFrame("Swing UI Test");
-//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//            frame.setSize(300, 200);
-//
-//            JButton button = new JButton("Click Me");
-//            button.addMouseListener(new java.awt.event.MouseAdapter() {
-//                public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                    buttonMouseClicked(evt);
-//                }
-//            });
-//
-//            frame.getContentPane().add(button);
-//            frame.setVisible(true);
-            frame = new JFrame("Swing UI Test");
-            frame.setSize(600,600);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setLayout(null);
-            frame.setResizable(false);
-            panel1=new JPanel();
-            panel1.setBounds(0,0,600,300);
-            panel1.setBackground(new Color(64,95,111));
-            panel1.setLayout(null);
-            JButton button = new JButton("Click Me");
-            button.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    try {
-                        buttonMouseClicked(evt);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            });
-            panel1.add(button);
-        });
-    }
-
-
-
-//    @Test
-    public void testMouseClick() throws AWTException {
-
-//            frame = new JFrame("Swing UI Test");
-//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//            frame.setSize(300, 200);
-//
-//            JButton button = new JButton("Click Me");
-//            button.addMouseListener(new java.awt.event.MouseAdapter() {
-//                public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                    buttonMouseClicked(evt);
-//                }
-//            });
-//
-//            frame.getContentPane().add(button);
-//            frame.setVisible(true);
-            frame = new JFrame("Swing UI Test");
-            frame.setSize(600,600);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setLayout(null);
-            frame.setResizable(false);
-            panel1=new JPanel();
-            panel1.setBounds(0,0,600,300);
-            panel1.setBackground(new Color(64,95,111));
-            panel1.setLayout(null);
-            JButton button = new JButton("Click Me");
-            button.setSize(200,200);
-            button.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                    button.setText("Clicked!");
-                    try {
-                        buttonMouseClicked(evt);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            });
-//            panel1.add(button);
-//            frame.getContentPane().add(panel1);
-            frame.getContentPane().add(button);
-        frame.setVisible(true);
-
-        Robot robot = new Robot();
-
-        // Get the button's position relative to the screen
-        Point buttonLocation = button.getLocation();
-        int buttonX = 50; // Offset for button size and borders
-        int buttonY = 50;
-
-        // Simulate a mouse click on the button
-        robot.mouseMove(buttonX, buttonY);
-        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-
-        // Wait for the event to be processed
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // Check if the button's text was updated
-        JButton button1 = (JButton) frame.getContentPane().getComponent(0);
-        assertEquals("Clicked!", button1.getText());
-    }
-
-
-    private void buttonMouseClicked(java.awt.event.MouseEvent evt) throws IOException {
-        JButton button = (JButton) evt.getSource();
-        frame.setTitle("atallitva");
-        button.setText("Clicked!");
-
-            FileWriter writer = new FileWriter("C:\\SynologyDrive\\1etM\\6. felev\\IET\\HF\\log.txt"); // Create a FileWriter object
-            // Write content to the file
-            writer.write("This is the first line.\n");
-            writer.write("This is the second line.\n");
-            writer.write("This is the third line.");
-            writer.write(button.getText());
-            writer.close(); // Close the writer to save and release resources
-    }
-
-//    @AfterEach
-    public void tearDown() {
-        SwingUtilities.invokeLater(() -> {
-            frame.dispose();
-        });
-    }
-
-    private void arrangeWithOnePlayer() throws AWTException {
+    @BeforeEach
+    public void arrangeWithOnePlayer() throws AWTException {
 
         // Starting game
         menu = new OpeningMenu();
@@ -183,7 +55,7 @@ public class SwingUITest {
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
         try {
-            Thread.sleep(500);
+            Thread.sleep(idleTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -196,22 +68,81 @@ public class SwingUITest {
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 
         try {
-            Thread.sleep(500);
+            Thread.sleep(idleTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Robot steps on the desired field
+     * @param row col
+     * @param col row
+     * @return success?
+     */
+    public boolean stepOnTable(int row, int col){
+        robot.mouseMove(50 + col * 90, 100 + row * 90);
+
+        try {
+            Thread.sleep(idleTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+
+        try {
+            Thread.sleep(idleTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        FieldV.Pos position = menu.getGame().getGtAtm().getCurrentPlayer().getMyField().view.getPos();
+        return position.getX() == row && position.getY() == col;
+    }
+
+    /**
+     * Part of the "Simple step and pick up test"
+     * arrangements:
+     * 			pick one player, hit "Mentés" button and then "Játék kezdése" button
+     */
     @Test
     public void openingGameOnePlayer() throws AWTException {
-        arrangeWithOnePlayer();
-
         Virologist player = menu.getGame().getGtAtm().getCurrentPlayer();
-        assertEquals("Barb", player.getName());
-        boolean result = false;
+
+        // expected result:
+        //			map is loaded which consists of squares with player's name on its head, with empty inventory
+
+        assertEquals("Barb", player.getName(), "Player name is not correct!");
         int inventoryCount = player.getMyEquipment().size() + player.getAgentCollection().size() + player.getEffects().size() + player.getLearnedCodes().size();
-        assertEquals(0, inventoryCount);
+        assertEquals(0, inventoryCount, "Inventory is not empty!");
     }
+
+
+    /**
+     * Part of the "Simple step and pick up test"
+     * Step 1:
+     *      Click on the field next to the player
+     */
+    @Test
+    public void simpleStepAndPickupTest_StepOne() throws AWTException {
+        // expected result:
+        //			the player steps on the chosen field
+        assertTrue(stepOnTable(5, 4), "Nem jó");
+
+
+    }
+
+    @AfterEach
+    public void closeGameWindow(){
+        try{
+            menu.getGame().dispose();
+        }
+        catch (Exception ignored){
+        }
+    }
+
 //        // Move the Player
 //        robot.mouseMove(300, 650);
 //        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
@@ -226,3 +157,4 @@ public class SwingUITest {
 //        assertEquals("Barb", menu.getname(0));
 
 }
+
