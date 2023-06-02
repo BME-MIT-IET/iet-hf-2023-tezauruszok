@@ -1,1 +1,9 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/coREwzrI)
+A házi feladat során a Szoftver projekt laboratórium tárgyra készített alkalmazás ellenőrzése volt a cél.
+
+A Technológia fókusz témakörből az alábbi feladatokat választottuk:
+-Manuális kód átvizsgálás elvégzése az alkalmazás egy részére (GitHub, Gerrit...) + Statikus analízis eszköz futtatása és jelzett hibák átnézése (SonarCloud, SpotBugs, VS Code Analyzer, Codacy, Coverity Scan...)
+-Deployment segítése (Docker, Vagrant, felhő szolgáltatásba telepítés, ha értelmes az adott alkalmazás esetén...)
+
+A Termék/felhasználó fókusz témakörből az alábbi feladatokat választottuk:
+-UI tesztek készítése (Selenium, Tosca, Appium...)
+-Manuális tesztek megtervezése, végrehajtása és dokumentálása vagy exploratory testing
