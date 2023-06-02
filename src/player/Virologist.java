@@ -4,7 +4,7 @@ package player;
 //  @ Project : Projekt labor
 //  @ File Name : player.Virologist.java
 //  @ Date : 2022. 03. 22.
-//  @ Author : Richly Bálint yo685y
+//  @ Author : Richly Bï¿½lint yo685y
 //
 
 import java.util.ArrayList;
@@ -57,7 +57,7 @@ public class Virologist {
 	private int ID;
 
 	/**
-	 * player.Virologist konstruktor, inicializálja az értékeket.
+	 * player.Virologist konstruktor, inicializï¿½lja az ï¿½rtï¿½keket.
 	 */
 	public Virologist(Field initField) {
 		Main.printMethod("player.Virologist.player.Virologist()", true);
@@ -94,7 +94,7 @@ public class Virologist {
 		ID=0;
 	}
 
-	///Felvettem egy új konstruktort
+	///Felvettem egy ï¿½j konstruktort
 	public Virologist(Field initField, int id) {
 		Main.printMethod("player.Virologist.player.Virologist()", true);
 		aminoAcid = 0;
@@ -121,10 +121,10 @@ public class Virologist {
 	}
 
 	/**
-	 * Lépteti a virológust a megadott számú mezõre
+	 * Lï¿½pteti a virolï¿½gust a megadott szï¿½mï¿½ mezï¿½re
 	 *
-	 * @param fieldNumber - A mezõ száma, ahová lépni akar
-	 * @return boolean - lépés sikeressége
+	 * @param fieldNumber - A mezï¿½ szï¿½ma, ahovï¿½ lï¿½pni akar
+	 * @return boolean - lï¿½pï¿½s sikeressï¿½ge
 	 */
 	public boolean move(Integer fieldNumber) {
 		Main.printMethod("player.Virologist.move()", true);
@@ -142,19 +142,19 @@ public class Virologist {
 	}
 
 	/**
-	 * a ágens felkenése p Virológusra
+	 * a ï¿½gens felkenï¿½se p Virolï¿½gusra
 	 *
-	 * @param p - a metódus p-re keni fel az ágenst
-	 * @param a- az ágens amit felken
+	 * @param p - a metï¿½dus p-re keni fel az ï¿½genst
+	 * @param a- az ï¿½gens amit felken
 	 */
 	public void useAgent(Virologist p, Agent a) {
 		Main.printMethod("player.Virologist.useAgent()", true);
-		//Ha nem egy mezõn állnak
+		//Ha nem egy mezï¿½n ï¿½llnak
 
 		if (!p.equals(this)) {
 			if ( !p.isSamePos(myField) ) { return; }
 
-			//Ha védett akkor return
+			//Ha vï¿½dett akkor return
 			if( p.effectedBy( "effect.AgentProtection" ) ) { return; }
 		}
 
@@ -165,7 +165,7 @@ public class Virologist {
 			}
 		}
 		if (idx != -1) {
-			//Ágens felkenése
+			//ï¿½gens felkenï¿½se
 			agentCollection.get(idx).apply(p);
 			agentCollection.remove(idx);
 		}
@@ -183,7 +183,7 @@ public class Virologist {
 	}
 
 	/**
-	 * Hozzáad egy eff effektet a virológus effects attribútumához
+	 * Hozzï¿½ad egy eff effektet a virolï¿½gus effects attribï¿½tumï¿½hoz
 	 *
 	 * @param eff
 	 */
@@ -194,8 +194,8 @@ public class Virologist {
 	}
 
 	/**
-	 * Megnézi, hogy szerepel e ‘e’ a myEquipment-ben, ha igen akkor igazzal tér vissza					//SZERINTEM JOBB VOLNA, HA TÖBBET IS FEL TUD VENNI
-	 * Ha nem, akkor hamissal tér vissza és hozzáadja e-t a virológus védõfelszerelés kollekciójához
+	 * Megnï¿½zi, hogy szerepel e ï¿½eï¿½ a myEquipment-ben, ha igen akkor igazzal tï¿½r vissza					//SZERINTEM JOBB VOLNA, HA Tï¿½BBET IS FEL TUD VENNI
+	 * Ha nem, akkor hamissal tï¿½r vissza ï¿½s hozzï¿½adja e-t a virolï¿½gus vï¿½dï¿½felszerelï¿½s kollekciï¿½jï¿½hoz
 	 *
 	 * @param e
 	 *
@@ -207,7 +207,7 @@ public class Virologist {
 		myEquipment.add(e);
 
 		Main.printMethod("return", false);
-		return true; //LEHETNE VOID HA TÖBBET FEL TUD VENNI
+		return true; //LEHETNE VOID HA Tï¿½BBET FEL TUD VENNI
 	}
 
 	/**
@@ -231,10 +231,10 @@ public class Virologist {
 
 
 	/**
-	 * Növeli az aminosav gyûjthetõ mennyiségét
-	 * ez az érték nem mehet 0 alá és 20 fölé
+	 * Nï¿½veli az aminosav gyï¿½jthetï¿½ mennyisï¿½gï¿½t
+	 * ez az ï¿½rtï¿½k nem mehet 0 alï¿½ ï¿½s 20 fï¿½lï¿½
 	 *
-	 * @param value - ezzel az értékkel változtat az aminósav mennyiségén
+	 * @param value - ezzel az ï¿½rtï¿½kkel vï¿½ltoztat az aminï¿½sav mennyisï¿½gï¿½n
 	 */
 	public void increaseAminoAcid(Integer value) {
 		Main.printMethod("player.Virologist.increaseAminoAcid()", true);
@@ -259,10 +259,10 @@ public class Virologist {
 	}
 
 	/**
-	 * Növeli a nukleotid gyûjthetõ mennyiségét
-	 * ez az érték nem mehet 0 alá és 20 fölé
+	 * Nï¿½veli a nukleotid gyï¿½jthetï¿½ mennyisï¿½gï¿½t
+	 * ez az ï¿½rtï¿½k nem mehet 0 alï¿½ ï¿½s 20 fï¿½lï¿½
 	 *
-	 * @param value - ezzel az értékkel váltotzat a nukleotid mennyiségén
+	 * @param value - ezzel az ï¿½rtï¿½kkel vï¿½ltotzat a nukleotid mennyisï¿½gï¿½n
 	 */
 	public void increaseNucleotide(Integer value) {
 		Main.printMethod("player.Virologist.increaseNucleotide()", true);
@@ -287,7 +287,7 @@ public class Virologist {
 	}
 
 	/**
-	 * Igazzal tér vissza, ha a virológus f mezõn áll
+	 * Igazzal tï¿½r vissza, ha a virolï¿½gus f mezï¿½n ï¿½ll
 	 *
 	 * @param f
 	 */
@@ -298,9 +298,9 @@ public class Virologist {
 	}
 
 	/**
-	 * Igazzal tér vissza, ha e effekt hat a virológusra
+	 * Igazzal tï¿½r vissza, ha e effekt hat a virolï¿½gusra
 	 *
-	 * @param e - a vizsgálandó effekt.
+	 * @param e - a vizsgï¿½landï¿½ effekt.
 	 */
 	public Boolean effectedBy(String e ) {
 		Main.printMethod("player.Virologist.effectedBy()", true);
@@ -316,8 +316,8 @@ public class Virologist {
 	}
 
 	/**
-	 * A virológusra ható hatásokat érvényesíti
-	 * A virológus lépésének elején hívja meg a player.GameTable
+	 * A virolï¿½gusra hatï¿½ hatï¿½sokat ï¿½rvï¿½nyesï¿½ti
+	 * A virolï¿½gus lï¿½pï¿½sï¿½nek elejï¿½n hï¿½vja meg a player.GameTable
 	 *
 	 * @return false - ha a kor kimarad
 	 */
@@ -336,9 +336,9 @@ public class Virologist {
 	}
 
 	/**
-	 * Visszatér a virológus genetikai kód gyûjteményének számosságával
+	 * Visszatï¿½r a virolï¿½gus genetikai kï¿½d gyï¿½jtemï¿½nyï¿½nek szï¿½mossï¿½gï¿½val
 	 *
-	 * @return - az ágens kollekció mérete
+	 * @return - az ï¿½gens kollekciï¿½ mï¿½rete
 	 */
 	public Integer countOfLearnedCodes() {
 		Main.printMethod("player.Virologist.countOfLearnedCodes()", true);
@@ -347,8 +347,8 @@ public class Virologist {
 	}
 
 	/**
-	 * Csökkenti a hatások hatásidejét
-	 * Ha valami hatását veszti akkor eldobja azt a hatást
+	 * Csï¿½kkenti a hatï¿½sok hatï¿½sidejï¿½t
+	 * Ha valami hatï¿½sï¿½t veszti akkor eldobja azt a hatï¿½st
 	 */
 	public void afterStep() {
 		Main.printMethod("player.Virologist.afterStep()", true);
@@ -359,7 +359,7 @@ public class Virologist {
 	/**
 	 *
 	 *
-	 * @param v - v-nek átadja a felszereléseket és az anyagokat.
+	 * @param v - v-nek ï¿½tadja a felszerelï¿½seket ï¿½s az anyagokat.
 	 */
 	public void iAmRobbed(Virologist v) {
 		Main.printMethod("player.Virologist.iAmRobbed()", true);
@@ -373,9 +373,9 @@ public class Virologist {
 	}
 
 	/**
-	 * A kapott kódot hozzáadja a kollekcióhoz
+	 * A kapott kï¿½dot hozzï¿½adja a kollekciï¿½hoz
 	 *
-	 * @param c - az új kód
+	 * @param c - az ï¿½j kï¿½d
 	 */
 	public void learnCode(GeneticCode c) {
 		Main.printMethod("player.Virologist.learnCode()", true);
@@ -391,8 +391,8 @@ public class Virologist {
 	}
 
 	/**
-	 * Segédfüggvény az ágens lekérdezéséhez, hogy név alapján meg lehessen kapni a kollekció ilyen típusú ágensét
-	 * @param aName - ágens neve
+	 * Segï¿½dfï¿½ggvï¿½ny az ï¿½gens lekï¿½rdezï¿½sï¿½hez, hogy nï¿½v alapjï¿½n meg lehessen kapni a kollekciï¿½ ilyen tï¿½pusï¿½ ï¿½gensï¿½t
+	 * @param aName - ï¿½gens neve
 	 * @return - learnedCodes indexe
 	 */
 	public Integer getAgentIdxByName(String aName) throws Exception {
@@ -412,11 +412,11 @@ public class Virologist {
 				gc = new Vaccine();
 				break;
 			default:
-				throw new Exception("Nem lehet ilyet létrehozni!");
+				throw new Exception("Nem lehet ilyet lï¿½trehozni!");
 		}
 		for (Agent a : agentCollection) {
 			if (a.getClass().equals(gc.getClass())) {
-				return learnedCodes.indexOf(a);
+				return agentCollection.indexOf(a);
 			}
 		}
 		return -1;
@@ -442,7 +442,7 @@ public class Virologist {
 				gc = new VaccineCode();
 				break;
 			default:
-				throw new Exception("Nem lehet ilyet létrehozni!");
+				throw new Exception("Nem lehet ilyet lï¿½trehozni!");
 		}
 		for (GeneticCode c : learnedCodes) {
 			if (c.getClass().equals(gc.getClass())) {
@@ -453,7 +453,7 @@ public class Virologist {
 	}
 
 	/**
-     * Létrehozza a választott ágenst genetikai kód alapján
+     * Lï¿½trehozza a vï¿½lasztott ï¿½genst genetikai kï¿½d alapjï¿½n
      *
      * @param idx
 	 */
@@ -491,7 +491,7 @@ public class Virologist {
 	}
 
 	/**
-	 * Kapacitás megduplázása az anyagokhoz. EZ NEM SZEREPELT A KORÁBBI DOKSIKBAN
+	 * Kapacitï¿½s megduplï¿½zï¿½sa az anyagokhoz. EZ NEM SZEREPELT A KORï¿½BBI DOKSIKBAN
 	 */
 	public void doubleCapacity() {
 		Main.printMethod("player.Virologist.doubleCapacity()", true);
@@ -524,7 +524,7 @@ public class Virologist {
 	}
 
 	/**
-	 * elfelejti a virológus addig megtanult genetikai kódjait
+	 * elfelejti a virolï¿½gus addig megtanult genetikai kï¿½djait
 	 */
 	public void forgetGeneticCodes() {
 		Main.printMethod("player.Virologist.forgetGeneticCodes()", true);
