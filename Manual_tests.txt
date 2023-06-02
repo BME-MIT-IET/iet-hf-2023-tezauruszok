@@ -1,0 +1,184 @@
+Manual test cases:
+	Simple step and pick up test:
+		arrangements:
+			pick one player, hit Mentés button and then Játék kezdése button
+		expected result:
+			map is loaded which consists of squares with player's name on its head, with empty inventory
+		result:
+			as expected
+		
+		step1:
+			click on the field next to the player
+		expected result:
+			the player steps on the chosen field
+		result:
+			as expected
+		
+		step2:
+			click on the storage next to the player
+		expected result:
+			the player steps on the chosen storage amino acid and nucleotide counters are increased by 20
+		result:
+			as expected
+		
+		step3:
+			click on the bunker next to the player
+		expected result:
+			the player steps on the chosen bunker the equipment on the field is displayed in the inventory
+		result:
+			inventory contains two instances of the equipment on the field
+		
+		step4:
+			step down until the last bunker
+		expected result:
+			the inventory should only contain the first 3 equipment
+		result:
+			the inventory contains all kinds of equipment
+		
+		step5:
+			click on the lab next to the player
+		expected result:
+			the player steps on the chosen lab a genetic code which was on the field is displayed in the inventory
+		result:
+			as expected
+		
+		step6:
+			step up until the last lab
+		expected result:
+			game should be over, the virologist should win
+		result:
+			games goes on
+
+	Sack and jacket effect test:
+		arrangements:
+			pick one player, hit Mentés button and then Játék kezdése button
+		expected result:
+			map is loaded which consists of squares with player's name on its head, with empty inventory
+			
+		step1:
+			step onto a storage
+		expected result:
+			amino acid and nucleotide counters are increased by 20
+		result:
+			as expected
+			
+		step2:
+			step onto the bunker with sack
+		expected:
+			inventory contains sack
+		result:
+			inventory contains two instances of sack
+			
+		step3:
+			step onto a storage
+		expected result:
+			amino acid and nucleotide counters are increased by 21
+		result:
+			as expected
+	
+	Two virologists interactions test:
+		arrangements:
+			pick two players, hit Mentés button and then Játék kezdése button
+		expected result:
+			map is loaded which consists of squares with players' name on their head, with empty inventory
+		result:
+			as expected
+			
+		step1:
+			step onto the other players field
+		expected result:
+			two players are on the same field one of them covers the other
+		result:
+			as expected
+			
+		step2:
+			with player two step on a storage, with player one just wander on simple fields
+		expected result:
+			player two's amino acid and nucleotide counter increased by 20, nothing happens to player one
+		result:
+			as expected
+			
+		step3:
+			with player two step on a lab, with player one just wander on simple fields
+		expected result:
+			player two's inventory displays the genetic code from the lab, nothing happens to player one
+		result:
+			as expected
+		
+		step4:
+			create a virus with the known genetic code with player two
+		expected result:
+			player two's inventory displays the virus created from genetic code, player two's amino acid and nucleotide counter decreased by the cost of the virus
+		result:
+			the counter only decreased in the next step
+		
+		step5:
+			step onto the same field with the two players
+		expected result:
+			two players are on the same field one of them covers the other
+		result:
+			as expected
+			
+		step6:
+			use the virus with player two on player one
+		expected result:
+			player one's inventory displays the effect that the virus caused player two's inventory does not contain the used virus
+		result:
+			as expected
+		
+	Effects test:
+		arrangements:
+			pick two players, hit Mentés button and then Játék kezdése button
+		expected result:
+			map is loaded which consists of squares with players' name on their head, with empty inventory
+		result:
+			as expected
+		
+		step1:
+			with player two step on a sack with player one wander on simple fields
+		expected result:
+			player two's inventory contains sack
+		result:
+			inventory contains two instances of sack
+		
+		step2:
+			with player two step through every storage, with player one step on a storage
+		expected result:
+			player two's amino acid and nucleotide counter increased to 80 player one's amino acid and nucleotide counter increased by 20
+		result:
+			as expected
+			
+		step3:
+			with player two step on second lab then step there with player one
+		expected result:
+			two players are on the same field one of them covers the other both inventories contain forget genetic code
+		result:
+			as expected
+			
+		step4:
+			with player two create forget virus
+		expected result:
+			player two's inventory contains forget virus
+		result:
+			as expected
+	
+		step5:
+			with player two spread forget virus onto player one
+		expected result:
+			player one's inventory does not contain any genetic code
+		result:
+			as expected
+			
+		step6:
+			step down do the same with freeze virus
+		expected result:
+			player two's amino acid and nucleotide counter is increased by 20 player one's amino acid and nucleotide counter decreased by 20 and is frozen
+		result:
+			cannot create freeze virus only forget(first in the list of codes), counters does not modify and frozen player can step
+		
+		step7:
+			step down do the same with crazy virus
+		expected result:
+			player one steps randomly
+		result:
+			cannot create crazy virus only forget(first in the list of codes), and player one does not step randomly

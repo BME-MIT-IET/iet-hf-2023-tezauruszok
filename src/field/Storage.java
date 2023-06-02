@@ -35,12 +35,19 @@ public class Storage extends Field {
 
 	}
 
-	private void regenerate() {
+	private void regenerateRandom() {
 		Main.printMethod("field.Storage.regenerate()", true);
 		Random rand = new Random();
 
 		aminoAcid = rand.nextInt(5) + 1;
 		nucleotide = rand.nextInt(5) + 1;
+		Main.printMethod("Return", false);
+	}
+
+	private void regenerate() {
+		Main.printMethod("field.Storage.regenerate()", true);
+		aminoAcid = 21;
+		nucleotide = 21;
 		Main.printMethod("Return", false);
 	}
 

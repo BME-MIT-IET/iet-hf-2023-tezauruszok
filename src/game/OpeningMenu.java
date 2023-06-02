@@ -108,4 +108,9 @@ public class OpeningMenu extends JFrame implements ActionListener {
     }
     String getname(int index){return chosennames.get(index);}
     boolean getbezart(){return bezart;}
+
+    // It is needed to have it available for the SwingUITest class
+    public WindowV getGame(){
+        return game;
+    }
 }

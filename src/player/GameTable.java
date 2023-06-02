@@ -70,7 +70,7 @@ public class GameTable extends AbstractTableModel {
 		fire();
 	}
 
-	public void generateMap() {
+	public void generateRandomMap() {
 		int n = 100;
 		board = new ArrayList<>();
 
@@ -194,15 +194,149 @@ public class GameTable extends AbstractTableModel {
 			board.get(i).setNeighbours(neighbours);
 		}
 
+		placePlayersRandomly();
+	}
+
+	public void generateMap() {
+		int n = 100;
+		board = new ArrayList<>();
+
+		for (Integer w = 0; w < width; w++) {
+			for (Integer h = 0; h < height; h++) {
+				board.add(null);
+			}
+		}
+
+		// Speciális mezők feltöltése
+
+		int remaining = 4;
+		int fieldId = 57;
+		while (remaining > 0) {		// laboratoriumok
+			if (board.get(fieldId) == null) {
+				switch (remaining) {        // all different types
+					case 1:
+						board.set(fieldId, new Laboratory(new CrazyVirusCode()));
+						board.get(fieldId).setFieldNumber(fieldId);
+						break;
+					case 2:
+						board.set(fieldId, new Laboratory(new FreezeVirusCode()));
+						board.get(fieldId).setFieldNumber(fieldId);
+						break;
+					case 3:
+						board.set(fieldId, new Laboratory(new ForgetVirusCode()));
+						board.get(fieldId).setFieldNumber(fieldId);
+						break;
+					case 4 :
+						board.set(fieldId, new Laboratory(new VaccineCode()));
+						board.get(fieldId).setFieldNumber(fieldId);
+						break;
+				}
+				board.get(fieldId).view = new FieldV(fieldId / 10, fieldId % 10);
+				board.get(fieldId).view.c = Color.white;
+				remaining--;
+				fieldId += 10;
+			}
+		}
+
+		remaining = 4;
+		fieldId = 56;
+		while (remaining > 0) {		// bunkerek
+			Random rnd = new Random();
+			if (board.get(fieldId) == null) {
+				switch (remaining) {        // all different types
+					case 1 :
+						board.set(fieldId, new Bunker(new Jacket()));
+						board.get(fieldId).setFieldNumber(fieldId);
+						board.get(fieldId).view = new FieldV(fieldId / 10,fieldId % 10);
+						board.get(fieldId).view.setJacket();
+						break;
+					case 2 :
+						board.set(fieldId, new Bunker(new Glove()));
+						board.get(fieldId).setFieldNumber(fieldId);
+						board.get(fieldId).view = new FieldV(fieldId / 10,fieldId % 10);
+						board.get(fieldId).view.setGlove();
+						break;
+					case 3:
+						board.set(fieldId, new Bunker(new Axe()));
+						board.get(fieldId).setFieldNumber(fieldId);
+						board.get(fieldId).view = new FieldV(fieldId / 10,fieldId % 10);
+						board.get(fieldId).view.setAxe();
+						break;
+					case 4 :
+						board.set(fieldId, new Bunker(new Sack()));
+						board.get(fieldId).setFieldNumber(fieldId);
+						board.get(fieldId).view = new FieldV(fieldId / 10,fieldId % 10);
+						board.get(fieldId).view.setSack();
+						break;
+				}
+
+				board.get(fieldId).view.c = Color.green;
+				remaining--;
+				fieldId += 10;
+			}
+		}
+
+		remaining = 4;
+		fieldId = 55;
+		while (remaining > 0) {		// raktar
+			if (board.get(fieldId) == null) {
+				board.set(fieldId, new Storage());
+				board.get(fieldId).setFieldNumber(fieldId);
+				board.get(fieldId).view = new FieldV(fieldId / 10,fieldId % 10);
+				board.get(fieldId).view.c = Color.blue;
+				remaining--;
+				fieldId += 10;
+			}
+		}
+
+		// maradék mező feltöltése
+		for (int i = 0; i < n; i++) {
+			if (board.get(i) == null) {
+				board.set(i, new Field());
+				board.get(i).setFieldNumber(i);
+				board.get(i).view = new FieldV(i / 10, i % 10);
+				board.get(i).view.c = Color.pink;
+			}
+		}
+
+
+		// szomszedok
+		for (int i = 0; i < n; i++) {
+			List<Field> neighbours = new ArrayList<>();
+			try {
+				neighbours.add(board.get(i-1));	// elotte
+			} catch (Exception e) {}
+			try {
+				neighbours.add(board.get(i-10));	// felette
+			} catch (Exception e) {}
+			try {
+				neighbours.add(board.get(i+1));	// utana
+			} catch (Exception e) {}
+			try {
+				neighbours.add(board.get(i+10));	// alatta
+			} catch (Exception e) {}
+
+			board.get(i).setNeighbours(neighbours);
+		}
+
 		placePlayers();
 	}
 
-	private void placePlayers() {
+	private void placePlayersRandomly() {
 		// jatekosok elhelyezese a palyan
 		for (Virologist v : players) {
 			Random rnd = new Random();
 			int fieldId = rnd.nextInt(100);
 			v.setMyField(board.get(fieldId));
+		}
+	}
+
+	private void placePlayers() {
+		// jatekosok elhelyezese a palyan
+		int fieldId = 53;
+		for (Virologist v : players) {
+			v.setMyField(board.get(fieldId));
+			++fieldId;
 		}
 	}
 
@@ -219,6 +353,9 @@ public class GameTable extends AbstractTableModel {
 
 	public void setWinGame(boolean b) {
 		winGame = b;
+	}
+	public boolean getWinGame() {
+		return winGame;
 	}
 
 	public Virologist getPlayer(int id) throws Exception{
