@@ -18,10 +18,8 @@ public class RandomMove extends Effect {
 	 * A v virológus véletlenszerõ mozgást fog végezni a pályán két körön át
 	 * @param v
 	 */
-	public void effect(Virologist v) {
+	public void effect(Virologist v, Random rand) {
 		Main.printMethod("effect.RandomMove.effect()", true);
-
-		Random rand = new Random();
 
 		for (int i = 0; i < 5; i++) {
 			Integer neighbourCount = v.getMyField().getNeighbours().size();

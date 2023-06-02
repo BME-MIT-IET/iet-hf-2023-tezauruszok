@@ -23,6 +23,7 @@ import field.Storage;
 import game.FieldV;
 import game.PlayerV;
 import game.WindowV;
+import random.RandomContainer;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -58,7 +59,7 @@ public class GameTable extends AbstractTableModel {
 			players.add(new Virologist(n));
 		}
 
-		generateMap();
+		generateMap(RandomContainer.rand);
 	}
 
 	public Virologist getCurrentPlayer() {
@@ -70,7 +71,7 @@ public class GameTable extends AbstractTableModel {
 		fire();
 	}
 
-	public void generateMap() {
+	public void generateMap(Random rnd) {
 		int n = 100;
 		board = new ArrayList<>();
 
@@ -84,7 +85,6 @@ public class GameTable extends AbstractTableModel {
 
 		int remaining = 4;
 		while (remaining > 0) {		// laboratoriumok
-			Random rnd = new Random();
 			int fieldId = rnd.nextInt(100);
 
 			if (board.get(fieldId) == null) {
@@ -114,7 +114,6 @@ public class GameTable extends AbstractTableModel {
 
 		remaining = 4;
 		while (remaining > 0) {		// bunkerek
-			Random rnd = new Random();
 			int fieldId = rnd.nextInt(100);
 
 			if (board.get(fieldId) == null) {
@@ -152,7 +151,6 @@ public class GameTable extends AbstractTableModel {
 
 		remaining = 4;
 		while (remaining > 0) {		// raktar
-			Random rnd = new Random();
 			int fieldId = rnd.nextInt(100);
 
 			if (board.get(fieldId) == null) {
@@ -194,13 +192,12 @@ public class GameTable extends AbstractTableModel {
 			board.get(i).setNeighbours(neighbours);
 		}
 
-		placePlayers();
+		placePlayers(RandomContainer.rand);
 	}
 
-	private void placePlayers() {
+	private void placePlayers(Random rnd) {
 		// jatekosok elhelyezese a palyan
 		for (Virologist v : players) {
-			Random rnd = new Random();
 			int fieldId = rnd.nextInt(100);
 			v.setMyField(board.get(fieldId));
 		}

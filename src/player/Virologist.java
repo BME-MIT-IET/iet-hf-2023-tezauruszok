@@ -17,6 +17,7 @@ import effect.Frozen;
 import equipment.Equipment;
 import field.Field;
 import game.PlayerV;
+import random.RandomContainer;
 import skeleton.Main;
 
 
@@ -324,7 +325,7 @@ public class Virologist {
 	public boolean beforeStep() {
 		Main.printMethod("player.Virologist.beforeStep()", true);
 		for(Effect e : effects) {
-			e.effect(this);
+			e.effect(this, RandomContainer.rand);
 			if (e.getClass().equals(new Frozen().getClass())) {
 				Main.printMethod("return", false);
 				return false;

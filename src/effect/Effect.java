@@ -11,11 +11,13 @@ package effect;//
 import player.Virologist;
 import skeleton.Main;
 
+import java.util.Random;
+
 public abstract class Effect {
 	private Integer duration;
 	private String name;
 
-	public void effect(Virologist v) {
+	public void effect(Virologist v, Random rand) {
 
 	}
 
