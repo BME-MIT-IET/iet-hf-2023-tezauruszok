@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="11b4ce7b-16a3-4910-a18e-7e4a938ad827" name="Changes" comment="Nagyjából működik. Rob, bear, ágens készítés hiányzik.">
+      <change afterPath="$PROJECT_DIR$/DockerFile" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="26jrEtLsSDqkt3Myx9uyIpsuxPf" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/programming/java/proj-lab&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Docker&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Docker.Docker">
+    <configuration name="Game" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-19" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="game.Main" />
+      <module name="kod" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="prototype.Main" />
+      <module name="skeleton" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="prototype.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Proto" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="prototype.Main" />
+      <module name="skeleton" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Skeleton" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="skeleton.Main" />
+      <module name="kod" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Docker" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="tezauruszok" />
+          <option name="containerName" value="TezauruszokContainer" />
+          <option name="envVars">
+            <list>
+              <DockerEnvVarImpl>
+                <option name="name" value="DISPLAY" />
+                <option name="value" value=":0" />
+              </DockerEnvVarImpl>
+            </list>
+          </option>
+          <option name="sourceFilePath" value="DockerFile" />
+          <option name="volumeBindings">
+            <list>
+              <DockerVolumeBindingImpl>
+                <option name="containerPath" value="/tmp/.X11-unix" />
+                <option name="hostPath" value="/tmp/.X11-unix" />
+              </DockerVolumeBindingImpl>
+            </list>
+          </option>
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Game" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Skeleton" />
+      <item itemvalue="Application.Proto" />
+      <item itemvalue="Docker.Docker" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.Docker" />
+        <item itemvalue="Application.Skeleton" />
+        <item itemvalue="Application.Proto" />
+        <item itemvalue="Application.Game" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\kicsi\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="11b4ce7b-16a3-4910-a18e-7e4a938ad827" name="Changes" comment="" />
+      <created>1647947732528</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1647947732528</updated>
+      <workItem from="1647947733990" duration="1793000" />
+      <workItem from="1648058752980" duration="2155000" />
+      <workItem from="1648120734357" duration="2966000" />
+      <workItem from="1648126340547" duration="983000" />
+      <workItem from="1648142622117" duration="7295000" />
+      <workItem from="1648201182607" duration="593000" />
+      <workItem from="1648314349032" duration="15090000" />
+      <workItem from="1648329589717" duration="411000" />
+      <workItem from="1648330209836" duration="151000" />
+      <workItem from="1648397579395" duration="256000" />
+      <workItem from="1650443262248" duration="583000" />
+      <workItem from="1650544413753" duration="80000" />
+      <workItem from="1650651262327" duration="7189000" />
+      <workItem from="1650827037198" duration="5624000" />
+      <workItem from="1650993370801" duration="7288000" />
+      <workItem from="1651096291847" duration="8000" />
+      <workItem from="1651483242001" duration="10412000" />
+      <workItem from="1651824792473" duration="5195000" />
+      <workItem from="1651914342812" duration="988000" />
+      <workItem from="1652101233675" duration="4497000" />
+      <workItem from="1652133970413" duration="615000" />
+      <workItem from="1652255935781" duration="5907000" />
+      <workItem from="1652555002343" duration="1025000" />
+      <workItem from="1652611183918" duration="2223000" />
+      <workItem from="1652642331346" duration="1625000" />
+      <workItem from="1652646852787" duration="1688000" />
+      <workItem from="1652692035938" duration="4036000" />
+      <workItem from="1652696123716" duration="778000" />
+      <workItem from="1652810444252" duration="131000" />
+      <workItem from="1652862880568" duration="1853000" />
+      <workItem from="1655920924315" duration="649000" />
+      <workItem from="1684683921979" duration="1760000" />
+      <workItem from="1684781011592" duration="734000" />
+      <workItem from="1684828821803" duration="1408000" />
+      <workItem from="1684830291843" duration="1339000" />
+      <workItem from="1685171202874" duration="9615000" />
+      <workItem from="1685192016737" duration="485000" />
+      <workItem from="1685193219625" duration="1322000" />
+      <workItem from="1685194690510" duration="2379000" />
+    </task>
+    <task id="LOCAL-00001" summary="Skeleton init">
+      <created>1647948815635</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1647948815635</updated>
+    </task>
+    <task id="LOCAL-00002" summary="CrazyVirus done">
+      <created>1648060001641</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1648060001641</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Virologist, metodusok egy része kész">
+      <created>1648126374413</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1648126374413</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Virologist Class, kész metódusok. JavaDoc kommentekek 80% kész">
+      <created>1648152428318</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1648152428318</updated>
+    </task>
+    <task id="LOCAL-00005" summary="kész skeleton, JavaDoc comment hiányzik (közös munka)">
+      <created>1648329327578</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1648329327578</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Changes by Patrick">
+      <created>1648329697999</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1648329697999</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Skeleton kesz ujra">
+      <created>1648329702293</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1648329702293</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Changes by Felhasználó">
+      <created>1648329707506</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1648329707506</updated>
+    </task>
+    <task id="LOCAL-00009" summary="skeleton kesz megintujra">
+      <created>1648329729724</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1648329729724</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Proto init, parancssoros program kész, parancsok kidolgozása kell">
+      <created>1650655878424</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1650655878424</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Proto init, parancssoros program kész, parancsok kidolgozása kell">
+      <created>1650656145330</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1650656145330</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Proto saját feladat elkészítve">
+      <created>1650658413072</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1650658413072</updated>
+    </task>
+    <task id="LOCAL-00013" summary="list kiegészítés">
+      <created>1650830636902</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1650830636902</updated>
+    </task>
+    <task id="LOCAL-00014" summary="idx vs sorszám">
+      <created>1650831577228</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1650831577228</updated>
+    </task>
+    <task id="LOCAL-00015" summary="create field javitas">
+      <created>1650995192996</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1650995192996</updated>
+    </task>
+    <task id="LOCAL-00016" summary="delete fölösleges nemidevalo szar">
+      <created>1650995513598</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1650995513598</updated>
+    </task>
+    <task id="LOCAL-00017" summary="proto teszt előtti javítás">
+      <created>1651000509712</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1651000509712</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Grafikus init, félkész pályagenerálás">
+      <created>1651915255284</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1651915255284</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Voronoi Backup">
+      <created>1652104231356</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1652104231356</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Grafikus init2, negyzetes palya">
+      <created>1652107840594</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1652107840594</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Grafikus | pályagenerálás">
+      <created>1652262222537</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1652262222537</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Működő mozgás, rendes képernyő méretezés">
+      <created>1652613364066</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1652613364066</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Nagyjából működik. Rob, bear, ágens készítés hiányzik.">
+      <created>1652647292787</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1652647292787</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Skeleton init" />
+    <MESSAGE value="CrazyVirus done" />
+    <MESSAGE value="Virologist, metodusok egy része kész" />
+    <MESSAGE value="Virologist Class, kész metódusok." />
+    <MESSAGE value="Virologist Class, kész metódusok. JavaDoc kommentekek 80% kész" />
+    <MESSAGE value="kész skeleton, JavaDoc comment hiányzik (közös munka)" />
+    <MESSAGE value="Changes by Patrick" />
+    <MESSAGE value="Skeleton kesz ujra" />
+    <MESSAGE value="Changes by Felhasználó" />
+    <MESSAGE value="skeleton kesz megintujra" />
+    <MESSAGE value="Proto init, parancssoros program kész, parancsok kidolgozása kell" />
+    <MESSAGE value="Proto saját feladat elkészítve" />
+    <MESSAGE value="list kiegészítés" />
+    <MESSAGE value="idx vs sorszám" />
+    <MESSAGE value="create field javitas" />
+    <MESSAGE value="delete fölösleges nemidevalo szar" />
+    <MESSAGE value="proto teszt előtti javítás" />
+    <MESSAGE value="Grafikus init, félkész pályagenerálás" />
+    <MESSAGE value="Voronoi Backup" />
+    <MESSAGE value="Grafikus init2, negyzetes palya" />
+    <MESSAGE value="Grafikus | pályagenerálás" />
+    <MESSAGE value="Működő mozgás, rendes képernyő méretezés" />
+    <MESSAGE value="Nagyjából működik. Rob, bear, ágens készítés hiányzik." />
+    <option name="LAST_COMMIT_MESSAGE" value="Nagyjából működik. Rob, bear, ágens készítés hiányzik." />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

@@ -1,0 +1,11 @@
+FROM ubuntu:latest
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    openjdk-17-jdk \
+    libxext6 \
+    libxtst6 \
+    libxrender1
+
+COPY ./out/production/kod/ /tmp
+WORKDIR /tmp
+ENTRYPOINT ["java","game.Main"]
